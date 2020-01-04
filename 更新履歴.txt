@@ -1,3 +1,7 @@
+2020/01/05
+Runnerクラスの仮実装
+コンストラクタ、getImageSizeX, getImageSizeYの実装
+
 2020/01/04
 画像の初期化
 

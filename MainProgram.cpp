@@ -1,21 +1,18 @@
 #include "DxLib.h"
-#include <string>
+#include "Runner.h"
 
-void initImage();
+void initWindow();
+void initBackGroundImage();
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow) {
-	ChangeWindowMode(TRUE);
-	const int windowSizeX = 1280;
-	const int windowSizeY = 720;
-	const int selectColorBit = 32;
-	SetGraphMode(windowSizeX, windowSizeY, selectColorBit);
-	SetWindowText("Kemushi Ga Huttekuru");
+	initWindow();
 	const int error = -1;
 	if (DxLib_Init() == error) {
 		return error;
 	}
+	initBackGroundImage();
 
-	initImage();
+	Runner runner;
 
 	WaitKey();
 
@@ -24,7 +21,16 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	return 0;
 }
 
-void initImage() {
+void initWindow() {
+	ChangeWindowMode(TRUE);
+	const int windowSizeX = 1280;
+	const int windowSizeY = 720;
+	const int selectColorBit = 32;
+	SetGraphMode(windowSizeX, windowSizeY, selectColorBit);
+	SetWindowText("Kemushi Ga Huttekuru");
+}
+
+void initBackGroundImage() {
 	const int backGroundImageHandle = LoadGraph("./Image/Background.png");
 	DrawGraph(0, 0, backGroundImageHandle, TRUE);
 	const int groundImageHandle = LoadGraph("./Image/Ground.png");
