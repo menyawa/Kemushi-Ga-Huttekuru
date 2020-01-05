@@ -10,7 +10,7 @@ private:
 	int imagePosY_;
 
 public:
-	Runner();
+	Runner(int groundPosY);
 
 	int getImageSizeX() {
 		return imageSizeX_;

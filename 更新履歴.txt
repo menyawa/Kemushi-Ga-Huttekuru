@@ -1,4 +1,8 @@
 2020/01/05
+メインのプログラムをMainProgram→GameControllerクラスに移動
+主要なフィールド、メソッドは全てそこに移動
+backGroundColor, Pos, groundColor, Posを追加
+
 メインループの仮実装
 ProcessMessageの追加(バグの防止)
 
