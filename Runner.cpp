@@ -15,7 +15,8 @@ void Runner::move(unsigned int backGroundColor) {
 	int drawAreaY = imagePosY_ + imageSizeY_;
 	DrawBox(imagePosX_, imagePosY_, drawAreaX, drawAreaY, backGroundColor, TRUE);
 
-	imagePosX_ += 5;
+	const int moveLength = 1;
+	imagePosX_ += moveLength;
 
 	DrawGraph(imagePosX_, imagePosY_, imageHandle_, TRUE);
 
