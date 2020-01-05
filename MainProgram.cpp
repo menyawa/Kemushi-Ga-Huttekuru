@@ -14,6 +14,14 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 	Runner runner;
 
+	while (TRUE) {
+		if (ProcessMessage() == error) {
+			break;
+		}
+
+		break;
+	}
+
 	WaitKey();
 
 	DxLib_End();

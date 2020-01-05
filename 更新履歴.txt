@@ -1,4 +1,7 @@
 2020/01/05
+メインループの仮実装
+ProcessMessageの追加(バグの防止)
+
 Runnerクラスの仮実装
 コンストラクタ、getImageSizeX, getImageSizeYの実装
 
