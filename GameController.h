@@ -15,8 +15,16 @@ public:
 	void initWindow();
 	void initBackGroundImage();
 
+	unsigned int getBackGroundColor() {
+		return backGroundColor_;
+	}
+
 	int getBackGroundPos() {
 		return backGroundPos_;
+	}
+
+	unsigned int getGroundColor() {
+		return groundColor_;
 	}
 
 	int getGroundPosY() {
@@ -39,8 +47,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	Runner runner(gameController.getGroundPosY());
 
 	while (ProcessMessage() != error) {
-
-		break;
+		runner.move(gameController.getBackGroundColor());
 	}
 
 	WaitKey();

@@ -7,6 +7,7 @@ void GameController::initWindow() {
 	const int selectColorBit = 32;
 	SetGraphMode(windowSizeX, windowSizeY, selectColorBit);
 	SetWindowText("Kemushi Ga Huttekuru");
+	SetDrawScreen(DX_SCREEN_BACK);
 }
 
 void GameController::initBackGroundImage() {
@@ -16,4 +17,6 @@ void GameController::initBackGroundImage() {
 	const int groundImageHandle = LoadGraph("./Image/Ground.png");
 	DrawGraph(backGroundPos_, groundPosY_, groundImageHandle, TRUE);
 	groundColor_ = GetColor(168, 104, 0);
+
+	ScreenFlip();
 }

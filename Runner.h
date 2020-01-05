@@ -11,6 +11,7 @@ private:
 
 public:
 	Runner(int groundPosY);
+	void move(unsigned int backGroundColor);
 
 	int getImageSizeX() {
 		return imageSizeX_;

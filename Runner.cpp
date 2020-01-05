@@ -9,3 +9,16 @@ Runner::Runner(int groundPosY) {
 	imagePosY_ = groundPosY - imageSizeY_;
 	DrawGraph(imagePosX_, imagePosY_, imageHandle_, TRUE);
 }
+
+void Runner::move(unsigned int backGroundColor) {
+	int drawAreaX = imagePosX_ + imageSizeX_;
+	int drawAreaY = imagePosY_ + imageSizeY_;
+	DrawBox(imagePosX_, imagePosY_, drawAreaX, drawAreaY, backGroundColor, TRUE);
+
+	imagePosX_ += 5;
+
+	DrawGraph(imagePosX_, imagePosY_, imageHandle_, TRUE);
+
+	ScreenFlip();
+	Sleep(20);
+}
