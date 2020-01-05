@@ -20,5 +20,4 @@ void Runner::move(unsigned int backGroundColor) {
 	DrawGraph(imagePosX_, imagePosY_, imageHandle_, TRUE);
 
 	ScreenFlip();
-	Sleep(20);
 }

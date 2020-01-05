@@ -13,7 +13,7 @@ private:
 
 public:
 	void initWindow();
-	void initBackGroundImage();
+	void drawBackGround();
 
 	unsigned int getBackGroundColor() {
 		return backGroundColor_;
@@ -36,17 +36,16 @@ public:
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow) {
 	GameController gameController;
-	
 	gameController.initWindow();
 	const int error = -1;
 	if (DxLib_Init() == error) {
 		return error;
 	}
-	gameController.initBackGroundImage();
 
 	Runner runner(gameController.getGroundPosY());
 
 	while (ProcessMessage() != error) {
+		gameController.drawBackGround();
 		runner.move(gameController.getBackGroundColor());
 	}
 

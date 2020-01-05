@@ -10,13 +10,11 @@ void GameController::initWindow() {
 	SetDrawScreen(DX_SCREEN_BACK);
 }
 
-void GameController::initBackGroundImage() {
+void GameController::drawBackGround() {
 	const int backGroundImageHandle = LoadGraph("./Image/Background.png");
 	DrawGraph(backGroundPos_, backGroundPos_, backGroundImageHandle, TRUE);
 	backGroundColor_ = GetColor(0, 180, 255);
 	const int groundImageHandle = LoadGraph("./Image/Ground.png");
 	DrawGraph(backGroundPos_, groundPosY_, groundImageHandle, TRUE);
 	groundColor_ = GetColor(168, 104, 0);
-
-	ScreenFlip();
 }
