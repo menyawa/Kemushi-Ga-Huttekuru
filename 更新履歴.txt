@@ -1,4 +1,6 @@
 2020/01/05
+Runnerの画像を縮小
+
 メインのプログラムをMainProgram→GameControllerクラスに移動
 主要なフィールド、メソッドは全てそこに移動
 backGroundColor, Pos, groundColor, Posを追加
