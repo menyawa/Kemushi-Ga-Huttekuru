@@ -7,23 +7,23 @@
 
 class GameController {
 private:
-	const int windowSizeX = 1280;
-	const int windowSizeY = 720;
-	unsigned int backGroundColor_;
-	int backGroundPos_ = 0;
-	unsigned int groundColor_;
+	const int windowWidth = 1280;
+	const int windowHeight = 720;
+	const unsigned int backGroundColor_ = GetColor(0, 180, 255);
+	const int backGroundPos_ = 0;
+	const unsigned int groundColor_ = GetColor(168, 104, 0);
 	const int groundPosY_ = 600;
 
 public:
 	void initWindow();
 	void drawBackGround();
 
-	int getWindowSizeX() {
-		return windowSizeX;
+	int getWindowWidth() {
+		return windowWidth;
 	}
 
-	int getWindowSizeY() {
-		return windowSizeY;
+	int getWindowHeight() {
+		return windowHeight;
 	}
 
 	unsigned int getBackGroundColor() {
@@ -59,7 +59,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		gameController.drawBackGround();
 		runner.move(gameController.getBackGroundColor());
 
-		Caterpillar* caterpillar = new Caterpillar(gameController.getWindowSizeX());
+		Caterpillar* caterpillar = new Caterpillar(gameController.getWindowWidth());
 		break;
 	}
 	Caterpillar::deleteAllInstances();

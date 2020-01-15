@@ -3,22 +3,21 @@
 
 Runner::Runner(int groundPosY) {
 	imageHandle_ = LoadGraph("./Image/Runner.png");
-	GetGraphSize(imageHandle_, &imageSizeX_, &imageSizeY_);
 
-	imagePosX_ = 0;
-	imagePosY_ = groundPosY - imageSizeY_;
-	DrawGraph(imagePosX_, imagePosY_, imageHandle_, TRUE);
+	xPos_ = 0;
+	yPos_ = groundPosY - height_;
+	DrawGraph(xPos_, yPos_, imageHandle_, TRUE);
 }
 
 void Runner::move(unsigned int backGroundColor) {
-	int drawAreaX = imagePosX_ + imageSizeX_;
-	int drawAreaY = imagePosY_ + imageSizeY_;
-	DrawBox(imagePosX_, imagePosY_, drawAreaX, drawAreaY, backGroundColor, TRUE);
+	int drawAreaWidth = xPos_ + width_;
+	int drawAreaHeight = yPos_ + height_;
+	DrawBox(xPos_, yPos_, drawAreaWidth, drawAreaHeight, backGroundColor, TRUE);
 
 	const int moveLength = 1;
-	imagePosX_ += moveLength;
+	xPos_ += moveLength;
 
-	DrawGraph(imagePosX_, imagePosY_, imageHandle_, TRUE);
+	DrawGraph(xPos_, yPos_, imageHandle_, TRUE);
 
 	ScreenFlip();
 }

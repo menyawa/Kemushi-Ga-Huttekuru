@@ -1,4 +1,6 @@
 2020/01/15
+Runner, GameControllerの変数名をリファクタリング、多少定数(const)化
+
 Caterpillarの変数名を多少リファクタリング
 
 毛虫のリサイズ・縦画像を追加

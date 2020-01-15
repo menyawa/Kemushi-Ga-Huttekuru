@@ -4,21 +4,21 @@
 class Runner {
 private:
 	int imageHandle_;
-	int imageSizeX_;
-	int imageSizeY_;
-	int imagePosX_;
-	int imagePosY_;
+	const int width_ = 100;
+	const int height_ = 100;
+	int xPos_;
+	int yPos_;
 
 public:
 	Runner(int groundPosY);
 	void move(unsigned int backGroundColor);
 
-	int getImageSizeX() {
-		return imageSizeX_;
+	int getWidth() {
+		return width_;
 	}
 
-	int getImageSizeY() {
-		return imageSizeY_;
+	int getHeight() {
+		return height_;
 	}
 };
 
