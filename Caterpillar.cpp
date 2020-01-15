@@ -12,21 +12,21 @@ Caterpillar::Caterpillar(int windowSizeX) {
 }
 
 //矩形の当たり判定
-bool Caterpillar::checkHit(int objectLeft, int objectRight, int objectTop, int objectButtom) {
-	int caterpillarSizeX, caterpillerSizeY;
-	GetGraphSize(imageHandle_, &caterpillarSizeX, &caterpillerSizeY);
+bool Caterpillar::checkHit(int hitObjectLeft, int hitObjectRight, int hitObjectTop, int hitObjectButtom) {
+	int width, height;
+	GetGraphSize(imageHandle_, &width, &height);
 	int caterpillarLeft = posX_;
-	int caterpillarRight = posX_ + caterpillarSizeX;
-	int caterpillarLeftButtom = posY_ + caterpillerSizeY;
+	int caterpillarRight = posX_ + width;
+	int caterpillarLeftButtom = posY_ + height;
 
 	bool hit = false;
 	//オブジェクトの右端が左端より右かつ、オブジェクトの左端が右端より左
-	if (objectRight > caterpillarLeft && objectLeft < caterpillarRight) {
+	if (hitObjectRight > caterpillarLeft && hitObjectLeft < caterpillarRight) {
 		int caterpillarTop = posY_;
-		int caterpillarButtom = posY_ + caterpillerSizeY;
+		int caterpillarButtom = posY_ + height;
 		
 		//上の判定を上端、下端で同じように行う
-		if (caterpillarTop > objectButtom && caterpillarButtom < objectTop) {
+		if (caterpillarTop > hitObjectButtom && caterpillarButtom < hitObjectTop) {
 			hit = true;
 		}
 	}
@@ -35,9 +35,9 @@ bool Caterpillar::checkHit(int objectLeft, int objectRight, int objectTop, int o
 }
 
 void Caterpillar::randomSpawn(int windowSizeX) {
-	int imageWidth = 66;
+	int width = 66;
 	//TODO:リプレイ機能を付けるため、乱数の初期値を保存しよう
-	posX_ = GetRand(windowSizeX - imageWidth);
+	posX_ = GetRand(windowSizeX - width);
 
 	DrawGraph(posX_, posY_, imageHandle_, TRUE);
 }
