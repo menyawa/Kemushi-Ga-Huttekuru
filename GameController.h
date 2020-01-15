@@ -3,9 +3,12 @@
 
 #include "DxLib.h"
 #include "Runner.h"
+#include "Caterpillar.h"
 
 class GameController {
 private:
+	const int windowSizeX = 1280;
+	const int windowSizeY = 720;
 	unsigned int backGroundColor_;
 	int backGroundPos_ = 0;
 	unsigned int groundColor_;
@@ -14,6 +17,14 @@ private:
 public:
 	void initWindow();
 	void drawBackGround();
+
+	int getWindowSizeX() {
+		return windowSizeX;
+	}
+
+	int getWindowSizeY() {
+		return windowSizeY;
+	}
 
 	unsigned int getBackGroundColor() {
 		return backGroundColor_;
@@ -48,8 +59,10 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		gameController.drawBackGround();
 		runner.move(gameController.getBackGroundColor());
 
-
+		Caterpillar* caterpillar = new Caterpillar(gameController.getWindowSizeX());
+		break;
 	}
+	Caterpillar::deleteAllInstances();
 
 	WaitKey();
 

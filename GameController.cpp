@@ -2,8 +2,6 @@
 
 void GameController::initWindow() {
 	ChangeWindowMode(TRUE);
-	const int windowSizeX = 1280;
-	const int windowSizeY = 720;
 	const int selectColorBit = 32;
 	SetGraphMode(windowSizeX, windowSizeY, selectColorBit);
 	SetWindowText("Kemushi Ga Huttekuru");

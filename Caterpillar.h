@@ -11,11 +11,15 @@ private:
 	int posX_;
 	int posY_;
 
-	static vector<Caterpillar*> caterpillers_;
+	static vector<Caterpillar*> caterpillerList_;
 
 public:
-	Caterpillar();
+	Caterpillar(int maxXLength);
 	bool checkHit(int leftTop, int rightTop, int objectTop, int objectButtom);
+
+	void randomSpawn(int maxXLength);
+
+	static void deleteAllInstances();
 };
 
 #endif
