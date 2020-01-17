@@ -2,6 +2,7 @@
 #define GaemController_Included
 
 #include "DxLib.h"
+#include "Fps.h"
 #include "Runner.h"
 #include "Caterpillar.h"
 
@@ -43,6 +44,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		return error;
 	}
 	GameController* gameController = new GameController();
+	Fps* fps = new Fps();
 	Runner* runner = new Runner(gameController->getGroundPosY());
 
 	while (ProcessMessage() != error) {
@@ -52,10 +54,16 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		Caterpillar* caterpillar = new Caterpillar(gameController->getWindowWidth());
 
 		ScreenFlip();
+
+		//60FPS‚É“®ì‚ð‡‚í‚¹‚Ä‚¢‚é
+		fps->update();
+		fps->wait();
+
 		break;
 	}
 
 	delete gameController;
+	delete fps;
 	delete runner;
 	Caterpillar::deleteAllInstances();
 

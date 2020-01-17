@@ -156,11 +156,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Caterpillar.cpp" />
+    <ClCompile Include="Fps.cpp" />
     <ClCompile Include="GameController.cpp" />
     <ClCompile Include="Runner.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Caterpillar.h" />
+    <ClInclude Include="Fps.h" />
     <ClInclude Include="GameController.h" />
     <ClInclude Include="Runner.h" />
   </ItemGroup>
