@@ -9,15 +9,12 @@ Runner::Runner(int groundPosY) {
 	DrawGraph(xPos_, yPos_, imageHandle_, TRUE);
 }
 
-void Runner::move(unsigned int backGroundColor) {
+void Runner::move() {
 	int drawAreaWidth = xPos_ + width_;
 	int drawAreaHeight = yPos_ + height_;
-	DrawBox(xPos_, yPos_, drawAreaWidth, drawAreaHeight, backGroundColor, TRUE);
 
 	const int moveLength = 1;
 	xPos_ += moveLength;
 
 	DrawGraph(xPos_, yPos_, imageHandle_, TRUE);
-
-	ScreenFlip();
 }

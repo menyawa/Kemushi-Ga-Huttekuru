@@ -8,8 +8,8 @@ using namespace std;
 class Caterpillar {
 private:
 	int imageHandle_;
-	int posX_;
-	int posY_;
+	int xPos_;
+	int yPos_;
 
 	static vector<Caterpillar*> caterpillerList_;
 

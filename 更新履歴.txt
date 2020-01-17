@@ -1,4 +1,12 @@
+2020/01/17
+GameControllerの初期化がDXライブラリの初期化より早く走っていたため、背景の初期化が出来ていなかった問題を修正
+
 2020/01/15
+ScreenFlipのタイミングを変更
+backgroundColor, GroundColorを削除(Imageだけで事足りるため)、ゲッターも削除
+backgroundImageHandle_, groundImageHandle_をフィールド化し、initWindowで初期化するよう修正(定数化しないのはLoadGraphがDXライブラリ初期化の後に実行しないと不具合が起きる恐れがあるため)
+それに伴い、Runnerのmoveメソッドの引数を削除
+
 Runner, GameControllerの変数名をリファクタリング、多少定数(const)化
 
 Caterpillarの変数名を多少リファクタリング

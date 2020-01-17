@@ -11,7 +11,7 @@ private:
 
 public:
 	Runner(int groundPosY);
-	void move(unsigned int backGroundColor);
+	void move();
 
 	int getWidth() {
 		return width_;

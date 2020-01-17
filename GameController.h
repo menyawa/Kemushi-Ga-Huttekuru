@@ -9,35 +9,26 @@ class GameController {
 private:
 	const int windowWidth = 1280;
 	const int windowHeight = 720;
-	const unsigned int backGroundColor_ = GetColor(0, 180, 255);
+	int backgroundImageHandle_;
 	const int backGroundPos_ = 0;
-	const unsigned int groundColor_ = GetColor(168, 104, 0);
+	int groundImageHandle_;
 	const int groundPosY_ = 600;
 
 public:
+	GameController();
+
 	void initWindow();
 	void drawBackGround();
 
 	int getWindowWidth() {
 		return windowWidth;
 	}
-
 	int getWindowHeight() {
 		return windowHeight;
 	}
-
-	unsigned int getBackGroundColor() {
-		return backGroundColor_;
-	}
-
 	int getBackGroundPos() {
 		return backGroundPos_;
 	}
-
-	unsigned int getGroundColor() {
-		return groundColor_;
-	}
-
 	int getGroundPosY() {
 		return groundPosY_;
 	}
@@ -46,22 +37,26 @@ public:
 #endif
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow) {
-	GameController gameController;
-	gameController.initWindow();
+	//これ以前にDXライブラリ関連の初期化を行うと正常に実行されないので注意
 	const int error = -1;
 	if (DxLib_Init() == error) {
 		return error;
 	}
-
-	Runner runner(gameController.getGroundPosY());
+	GameController* gameController = new GameController();
+	Runner* runner = new Runner(gameController->getGroundPosY());
 
 	while (ProcessMessage() != error) {
-		gameController.drawBackGround();
-		runner.move(gameController.getBackGroundColor());
+		gameController->drawBackGround();
+		runner->move();
 
-		Caterpillar* caterpillar = new Caterpillar(gameController.getWindowWidth());
+		Caterpillar* caterpillar = new Caterpillar(gameController->getWindowWidth());
+
+		ScreenFlip();
 		break;
 	}
+
+	delete gameController;
+	delete runner;
 	Caterpillar::deleteAllInstances();
 
 	WaitKey();
