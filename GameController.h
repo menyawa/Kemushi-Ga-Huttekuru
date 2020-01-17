@@ -50,7 +50,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	while (ProcessMessage() != error) {
 		gameController->drawBackGround();
 		runner->move();
-
+		Caterpillar::moveCaterpillars();
 		Caterpillar* caterpillar = new Caterpillar(gameController->getWindowWidth());
 
 		ScreenFlip();

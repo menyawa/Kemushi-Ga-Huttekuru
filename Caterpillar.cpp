@@ -8,6 +8,7 @@ Caterpillar::Caterpillar(int windowSizeX) {
 	caterpillerList_.push_back(this);
 	imageHandle_ = LoadGraph("./Image/Caterpillar_Resize_Rotate.png");
 	yPos_ = 0;
+	landing_ = false;
 	randomSpawn(windowSizeX);
 }
 
@@ -34,12 +35,28 @@ bool Caterpillar::checkHit(int hitObjectLeft, int hitObjectRight, int hitObjectT
 	return hit;
 }
 
+void Caterpillar::move() {
+	if (landing_) {
+		//左右決められた方向に移動
+		xPos_ += moveLandingVec_;
+	} else {
+		yPos_++;
+		DrawGraph(xPos_, yPos_, imageHandle_, TRUE);
+	}
+}
+
 void Caterpillar::randomSpawn(int windowSizeX) {
 	int width = 66;
 	//TODO:リプレイ機能を付けるため、乱数の初期値を保存しよう
 	xPos_ = GetRand(windowSizeX - width);
 
 	DrawGraph(xPos_, yPos_, imageHandle_, TRUE);
+}
+
+void Caterpillar::moveCaterpillars() {
+	for (Caterpillar* caterpillar : caterpillerList_) {
+		caterpillar->move();
+	}
 }
 
 void Caterpillar::deleteAllInstances() {
