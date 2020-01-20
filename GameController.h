@@ -45,6 +45,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	}
 	GameController* gameController = new GameController();
 	Fps* fps = new Fps();
+	Caterpillar::initStaticField();
 	Runner* runner = new Runner(gameController->getGroundPosY());
 
 	while (ProcessMessage() != error) {

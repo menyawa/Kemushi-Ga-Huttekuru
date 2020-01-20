@@ -1,15 +1,17 @@
-#include "DxLib.h"
 #include "Caterpillar.h"
-#include "string"
 
-vector<Caterpillar*> Caterpillar::caterpillerList_;
+vector<Caterpillar*>* Caterpillar::caterpillerList_;
+int Caterpillar::fallingLeftImageHandle_;
+int Caterpillar::fallingRightImageHandle_;
+int Caterpillar::landingLeftImageHandle_;
+int Caterpillar::landingRightImageHandle_;
 
-Caterpillar::Caterpillar(int windowSizeX) {
-	caterpillerList_.push_back(this);
-	imageHandle_ = LoadGraph("./Image/Caterpillar_Resize_Rotate.png");
+Caterpillar::Caterpillar(int spawnXPos) {
+	imageHandle_ = fallingLeftImageHandle_;
+	xPos_ = spawnXPos;
 	yPos_ = 0;
 	landing_ = false;
-	randomSpawn(windowSizeX);
+	caterpillerList_->push_back(this);
 }
 
 //矩形の当たり判定
@@ -45,22 +47,34 @@ void Caterpillar::move() {
 	}
 }
 
+void Caterpillar::initStaticField() {
+	caterpillerList_ = new vector<Caterpillar*>();
+
+	fallingLeftImageHandle_ = LoadGraph("./Image/Caterpillar_Falling_Left.png");
+	fallingRightImageHandle_ = LoadGraph("./Image/Caterpillar_Falling_Right.png");
+	landingLeftImageHandle_ = LoadGraph("./Image/Caterpillar_Landing_Left.png");
+	landingRightImageHandle_ = LoadGraph("./Image/Caterpillar_Landing_Right.png");
+}
+
 void Caterpillar::randomSpawn(int windowSizeX) {
 	int width = 66;
 	//TODO:リプレイ機能を付けるため、乱数の初期値を保存しよう
-	xPos_ = GetRand(windowSizeX - width);
+	int spawnXPos = GetRand(windowSizeX - width);
+	int yPos = 0;
 
-	DrawGraph(xPos_, yPos_, imageHandle_, TRUE);
+	DrawGraph(spawnXPos, yPos, fallingLeftImageHandle_, TRUE);
+	new Caterpillar(spawnXPos);
 }
 
 void Caterpillar::moveCaterpillars() {
-	for (Caterpillar* caterpillar : caterpillerList_) {
+	for (Caterpillar* caterpillar : *caterpillerList_) {
 		caterpillar->move();
 	}
 }
 
 void Caterpillar::deleteAllInstances() {
-	for (Caterpillar* caterpillar : caterpillerList_) {
+	for (Caterpillar* caterpillar : *caterpillerList_) {
 		delete caterpillar;
 	}
+	delete caterpillerList_;
 }
