@@ -45,7 +45,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	}
 	GameController* gameController = new GameController();
 	Fps* fps = new Fps();
-	Caterpillar::initStaticField();
+	Caterpillar::initImages();
 	Runner* runner = new Runner(gameController->getGroundPosY());
 
 	while (ProcessMessage() != error) {
@@ -66,7 +66,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	delete gameController;
 	delete fps;
 	delete runner;
-	Caterpillar::deleteAllInstances();
 
 	WaitKey();
 

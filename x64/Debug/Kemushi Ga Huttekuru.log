@@ -1,2 +1,15 @@
 ﻿  Caterpillar.cpp
-  Kemushi Ga Huttekuru.vcxproj -> C:\Users\ikejun\Source\Repos\DXLib\Kemushi Ga Huttekuru\x64\Debug\Kemushi Ga Huttekuru.exe
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\include\memory(2057,35): error C2664: 'Caterpillar::Caterpillar(Caterpillar &&)': 引数 1 を '_Ty' から 'int' へ変換できません。
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\include\memory(2057,35): error C2664:         with
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\include\memory(2057,35): error C2664:         [
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\include\memory(2057,35): error C2664:             _Ty=Caterpillar *
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\include\memory(2057,35): error C2664:         ]
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\include\memory(2057,56): message : この変換が可能なコンテキストはありません。
+C:\Users\ikejun\Source\Repos\DXLib\Kemushi Ga Huttekuru\Caterpillar.cpp(9,14): message : 'Caterpillar::Caterpillar' の宣言を確認してください
+  GameController.cpp
+  コードを生成中...
+C:\Users\ikejun\Source\Repos\DXLib\Kemushi Ga Huttekuru\Caterpillar.cpp(14): message : コンパイル対象の関数 テンプレート インスタンス化 'std::unique_ptr<Caterpillar,std::default_delete<_Ty>> std::make_unique<Caterpillar,Caterpillar*,0>(Caterpillar *&&)' のリファレンスを確認してください
+C:\Users\ikejun\Source\Repos\DXLib\Kemushi Ga Huttekuru\Caterpillar.cpp(14): message :         with
+C:\Users\ikejun\Source\Repos\DXLib\Kemushi Ga Huttekuru\Caterpillar.cpp(14): message :         [
+C:\Users\ikejun\Source\Repos\DXLib\Kemushi Ga Huttekuru\Caterpillar.cpp(14): message :             _Ty=Caterpillar
+C:\Users\ikejun\Source\Repos\DXLib\Kemushi Ga Huttekuru\Caterpillar.cpp(14): message :         ]

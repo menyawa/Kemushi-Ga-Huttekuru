@@ -1,6 +1,6 @@
 #include "Caterpillar.h"
 
-vector<Caterpillar*>* Caterpillar::caterpillerList_;
+vector<unique_ptr<Caterpillar>> Caterpillar::caterpillerList_;
 int Caterpillar::fallingLeftImageHandle_;
 int Caterpillar::fallingRightImageHandle_;
 int Caterpillar::landingLeftImageHandle_;
@@ -11,7 +11,7 @@ Caterpillar::Caterpillar(int spawnXPos) {
 	xPos_ = spawnXPos;
 	yPos_ = 0;
 	landing_ = false;
-	caterpillerList_->push_back(this);
+	caterpillerList_.push_back(make_unique<Caterpillar>(this));
 }
 
 //‹éŒ`‚Ì“–‚½‚è”»’è
@@ -47,9 +47,7 @@ void Caterpillar::move() {
 	}
 }
 
-void Caterpillar::initStaticField() {
-	caterpillerList_ = new vector<Caterpillar*>();
-
+void Caterpillar::initImages() {
 	fallingLeftImageHandle_ = LoadGraph("./Image/Caterpillar_Falling_Left.png");
 	fallingRightImageHandle_ = LoadGraph("./Image/Caterpillar_Falling_Right.png");
 	landingLeftImageHandle_ = LoadGraph("./Image/Caterpillar_Landing_Left.png");
@@ -67,14 +65,7 @@ void Caterpillar::randomSpawn(int windowSizeX) {
 }
 
 void Caterpillar::moveCaterpillars() {
-	for (Caterpillar* caterpillar : *caterpillerList_) {
-		caterpillar->move();
+	for (int index = 0; index < caterpillerList_.size(); index++) {
+		caterpillerList_[index]->move();
 	}
-}
-
-void Caterpillar::deleteAllInstances() {
-	for (Caterpillar* caterpillar : *caterpillerList_) {
-		delete caterpillar;
-	}
-	delete caterpillerList_;
 }
