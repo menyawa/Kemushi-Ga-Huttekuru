@@ -8,6 +8,7 @@ Runner::Runner(int groundPosY) {
 	yPos_ = groundPosY - height_;
 	DrawGraph(xPos_, yPos_, imageHandle_, TRUE);
 	movingVec_ = 1;
+	boostPower_ = 100;
 }
 
 void Runner::move() {
@@ -20,8 +21,11 @@ void Runner::move() {
 
 	int movingLength = 1;
 
-	if (CheckHitKey(KEY_INPUT_SPACE)) {
+	if (CheckHitKey(KEY_INPUT_SPACE) && canBoost()) {
 		movingLength *= 3;
+		boostPower_--;
+	} else if(CheckHitKey(KEY_INPUT_SPACE) == false){ //キーを離している時に貯まるようにしないと、即座にブースト→通常→ブースト→通常→…と繰り返してしまう
+		boostPower_++;
 	}
 		
 	xPos_ += movingLength * movingVec_;

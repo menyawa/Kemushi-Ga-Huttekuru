@@ -9,12 +9,17 @@ private:
 	int xPos_;
 	int yPos_;
 	int movingVec_; //¶‰EA‚Ç‚¿‚ç‚Ì•ûŒü‚É‘–‚é‚©
+	int boostPower_;
+
+	bool checkReachEdge();
+
+	inline bool canBoost() {
+		return boostPower_ > 0;
+	}
 
 public:
 	Runner(int groundPosY);
 	void move();
-
-	bool checkReachEdge();
 
 	inline int getWidth() {
 		return width_;
