@@ -155,12 +155,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BackgroundController.cpp" />
     <ClCompile Include="Caterpillar.cpp" />
     <ClCompile Include="Fps.cpp" />
     <ClCompile Include="GameController.cpp" />
     <ClCompile Include="Runner.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BackgroundController.h" />
     <ClInclude Include="Caterpillar.h" />
     <ClInclude Include="Fps.h" />
     <ClInclude Include="GameController.h" />

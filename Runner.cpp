@@ -20,7 +20,6 @@ void Runner::move() {
 	}
 
 	int movingLength = 1;
-
 	if (CheckHitKey(KEY_INPUT_SPACE) && canBoost()) {
 		movingLength *= 3;
 		boostPower_--;
