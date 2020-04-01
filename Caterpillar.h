@@ -22,8 +22,9 @@ private:
 	static int landingLeftImageHandle_;
 	static int landingRightImageHandle_;
 
-public:
 	Caterpillar(int spawnXPos);
+
+public:
 	bool checkHit(int leftTop, int rightTop, int objectTop, int objectButtom);
 	void move();
 

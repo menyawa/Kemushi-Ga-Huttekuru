@@ -43,29 +43,25 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	if (DxLib_Init() == error) {
 		return error;
 	}
-	GameController* gameController = new GameController();
-	Fps* fps = new Fps();
+	GameController gameController;
+	Fps fps;
 	Caterpillar::initImages();
-	Runner* runner = new Runner(gameController->getGroundPosY());
+	Runner runner(gameController.getGroundPosY());
 
 	while (ProcessMessage() != error) {
-		gameController->drawBackGround();
-		runner->move();
+		gameController.drawBackGround();
+		runner.move();
 		Caterpillar::moveCaterpillars();
-		Caterpillar* caterpillar = new Caterpillar(gameController->getWindowWidth());
+		Caterpillar::randomSpawn(gameController.getWindowWidth());
 
 		ScreenFlip();
 
 		//60FPS‚É“®ì‚ð‡‚í‚¹‚Ä‚¢‚é
-		fps->update();
-		fps->wait();
+		fps.update();
+		fps.wait();
 
 		break;
 	}
-
-	delete gameController;
-	delete fps;
-	delete runner;
 
 	WaitKey();
 

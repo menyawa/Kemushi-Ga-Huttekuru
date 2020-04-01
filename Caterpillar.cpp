@@ -6,12 +6,12 @@ int Caterpillar::fallingRightImageHandle_;
 int Caterpillar::landingLeftImageHandle_;
 int Caterpillar::landingRightImageHandle_;
 
+
 Caterpillar::Caterpillar(int spawnXPos) {
 	imageHandle_ = fallingLeftImageHandle_;
 	xPos_ = spawnXPos;
 	yPos_ = 0;
 	landing_ = false;
-	caterpillerList_.push_back(make_unique<Caterpillar>(this));
 }
 
 //‹éŒ`‚Ì“–‚½‚è”»’è
@@ -61,7 +61,7 @@ void Caterpillar::randomSpawn(int windowSizeX) {
 	int yPos = 0;
 
 	DrawGraph(spawnXPos, yPos, fallingLeftImageHandle_, TRUE);
-	new Caterpillar(spawnXPos);
+	caterpillerList_.push_back(unique_ptr<Caterpillar>(new Caterpillar(spawnXPos)));
 }
 
 void Caterpillar::moveCaterpillars() {
