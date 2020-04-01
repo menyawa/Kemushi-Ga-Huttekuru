@@ -45,9 +45,10 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	}
 	GameController gameController;
 	Fps fps;
-	Caterpillar::initImages();
+	Caterpillar::initStaticField();
 	Runner runner(gameController.getGroundPosY());
 
+	int counter = 0;
 	while (ProcessMessage() != error) {
 		gameController.drawBackGround();
 		runner.move();
@@ -60,7 +61,11 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		fps.update();
 		fps.wait();
 
-		break;
+		if (counter == 1000) {
+			break;
+		} else {
+			counter++;
+		}
 	}
 
 	WaitKey();

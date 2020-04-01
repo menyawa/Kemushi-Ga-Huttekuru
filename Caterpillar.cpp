@@ -1,6 +1,7 @@
 #include "Caterpillar.h"
 
 vector<unique_ptr<Caterpillar>> Caterpillar::caterpillerList_;
+mt19937_64 Caterpillar::mtRand_;
 int Caterpillar::fallingLeftImageHandle_;
 int Caterpillar::fallingRightImageHandle_;
 int Caterpillar::landingLeftImageHandle_;
@@ -47,17 +48,27 @@ void Caterpillar::move() {
 	}
 }
 
-void Caterpillar::initImages() {
+
+void Caterpillar::initStaticField() {
+	//非決定的な乱数生成で初期値を決め、以降は擬似乱数で生成する
+	//短い間隔で乱数を生成する可能性があるので、パフォーマンスの関係上乱数生成器をそのたび生成するのではなく、フィールドに保持しておく
+	random_device randomDevice;
+	mtRand_.seed(randomDevice());
+
+	//コンパイル時値が確定しないため、constでの指定は使えないことに注意
 	fallingLeftImageHandle_ = LoadGraph("./Image/Caterpillar_Falling_Left.png");
 	fallingRightImageHandle_ = LoadGraph("./Image/Caterpillar_Falling_Right.png");
 	landingLeftImageHandle_ = LoadGraph("./Image/Caterpillar_Landing_Left.png");
 	landingRightImageHandle_ = LoadGraph("./Image/Caterpillar_Landing_Right.png");
 }
 
+//新しい毛虫をランダムな位置にスポーンさせる
 void Caterpillar::randomSpawn(int windowSizeX) {
 	int width = 66;
+	//一様分布乱数生成器を作り、その後それに乱数生成器を渡してスポーン位置を決める
 	//TODO:リプレイ機能を付けるため、乱数の初期値を保存しよう
-	int spawnXPos = GetRand(windowSizeX - width);
+	uniform_int_distribution<> randDistribution(0, windowSizeX - width);
+	int spawnXPos = randDistribution(mtRand_);
 	int yPos = 0;
 
 	DrawGraph(spawnXPos, yPos, fallingLeftImageHandle_, TRUE);

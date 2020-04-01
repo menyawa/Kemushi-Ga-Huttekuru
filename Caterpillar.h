@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <memory>
+#include <random>
 #include <string>
 #include "DxLib.h"
 
@@ -17,6 +18,7 @@ private:
 	bool landing_;
 
 	static vector<unique_ptr<Caterpillar>> caterpillerList_;
+	static mt19937_64 mtRand_;
 	static int fallingLeftImageHandle_;
 	static int fallingRightImageHandle_;
 	static int landingLeftImageHandle_;
@@ -28,7 +30,7 @@ public:
 	bool checkHit(int leftTop, int rightTop, int objectTop, int objectButtom);
 	void move();
 
-	static void initImages();
+	static void initStaticField();
 	static void randomSpawn(int windowWidth);
 	static void moveCaterpillars();
 };
