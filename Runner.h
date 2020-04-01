@@ -8,16 +8,19 @@ private:
 	const int height_ = 100;
 	int xPos_;
 	int yPos_;
+	int movingVec_; //¶‰EA‚Ç‚¿‚ç‚Ì•ûŒü‚É‘–‚é‚©
 
 public:
 	Runner(int groundPosY);
 	void move();
 
-	int getWidth() {
+	bool checkReachEdge();
+
+	inline int getWidth() {
 		return width_;
 	}
 
-	int getHeight() {
+	inline int getHeight() {
 		return height_;
 	}
 };

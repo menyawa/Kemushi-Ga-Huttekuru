@@ -27,7 +27,7 @@ private:
 	Caterpillar(int spawnXPos);
 
 public:
-	bool checkHit(int leftTop, int rightTop, int objectTop, int objectButtom);
+	bool checkHitPlayer(int leftTop, int rightTop, int objectTop, int objectButtom);
 	void move();
 
 	static void initStaticField();

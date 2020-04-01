@@ -15,8 +15,8 @@ Caterpillar::Caterpillar(int spawnXPos) {
 	landing_ = false;
 }
 
-//矩形の当たり判定
-bool Caterpillar::checkHit(int hitObjectLeft, int hitObjectRight, int hitObjectTop, int hitObjectButtom) {
+//矩形の当たり判定でプレイヤーに当たったか確認する
+bool Caterpillar::checkHitPlayer(int hitObjectLeft, int hitObjectRight, int hitObjectTop, int hitObjectButtom) {
 	int width, height;
 	GetGraphSize(imageHandle_, &width, &height);
 	int caterpillarLeft = xPos_;
@@ -47,7 +47,6 @@ void Caterpillar::move() {
 		DrawGraph(xPos_, yPos_, imageHandle_, TRUE);
 	}
 }
-
 
 void Caterpillar::initStaticField() {
 	//非決定的な乱数生成で初期値を決め、以降は擬似乱数で生成する
