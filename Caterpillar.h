@@ -25,8 +25,14 @@ private:
 	static mt19937_64 mtRand_;
 	static int fallingImageHandles_[2];
 	static int landingImageHandles_[2];
+	static int spawnCount_; 
 
 	Caterpillar(int spawnXPos, int imageHandleIndex);
+
+	//カウントを用いてスポーンの間隔を制御する
+	inline static bool canSpawn() {
+		return spawnCount_ % 50 == 0;
+	}
 
 public:
 	bool checkHitPlayer(int leftTop, int rightTop, int objectTop, int objectButtom);
