@@ -42,8 +42,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	int counter = 0;
 	while (ProcessMessage() != error) {
 		backgroundController.drawBackGround();
-		runner.move();
-		Caterpillar::moveCaterpillars();
+		runner.run();
+		Caterpillar::moveAllCaterpillars(backgroundController);
 		Caterpillar::randomSpawn(gameController.getWindowWidth());
 
 		ScreenFlip();

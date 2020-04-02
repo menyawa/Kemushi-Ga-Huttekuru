@@ -14,7 +14,12 @@ public:
 	const int groundPosY_ = 600;
 	
 	static void initImageHandle();
+
 	void drawBackGround();
+
+	inline bool checkLandingGround(int topPos, int height) const{
+		return (topPos + height) >= groundPosY_;
+	}
 };
 
 #endif

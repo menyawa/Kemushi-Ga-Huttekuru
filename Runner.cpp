@@ -11,7 +11,7 @@ Runner::Runner(int groundPosY) {
 	boostPower_ = 100;
 }
 
-void Runner::move() {
+void Runner::run() {
 	int drawAreaWidth = xPos_ + width_;
 	int drawAreaHeight = yPos_ + height_;
 

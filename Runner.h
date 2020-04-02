@@ -19,7 +19,7 @@ private:
 
 public:
 	Runner(int groundPosY);
-	void move();
+	void run();
 
 	inline int getWidth() {
 		return width_;
