@@ -7,18 +7,12 @@ Runner::Runner(int groundPosY) {
 	xPos_ = 0;
 	yPos_ = groundPosY - height_;
 	DrawGraph(xPos_, yPos_, imageHandle_, TRUE);
-	movingVec_ = 1;
+	moveLandingVec_ = 1;
+	turningBackTheWay_ = false;
 	boostPower_ = 100;
 }
 
-void Runner::run() {
-	int drawAreaWidth = xPos_ + width_;
-	int drawAreaHeight = yPos_ + height_;
-
-	if (checkReachEdge()) {
-
-	}
-
+void Runner::run(int windowWidth) {
 	int movingLength = 1;
 	if (CheckHitKey(KEY_INPUT_SPACE) && canBoost()) {
 		movingLength *= 3;
@@ -27,11 +21,17 @@ void Runner::run() {
 		boostPower_++;
 	}
 		
-	xPos_ += movingLength * movingVec_;
+	xPos_ += movingLength * moveLandingVec_;
+	
+	if (checkReachOppositeEdge(windowWidth)) {
+		turningBackTheWay_ = true;
+		imageHandle_ = LoadGraph("./Image/TurningBack_TheWay_Runner.png");
+		//ブーストの関係で画面端からはみ出ている可能性もあるので、押し戻す
+		//その際、多少跳ね返るような挙動をすることに注意(はみ出ている分更に戻るので、画面端ピッタリの位置にはならないことがある)
+		int widthOfOutSideFromEdge = width_ - (windowWidth - xPos_);
+		xPos_ = windowWidth - width_ - widthOfOutSideFromEdge; 
+		moveLandingVec_ *= -1;
+	}
 
 	DrawGraph(xPos_, yPos_, imageHandle_, TRUE);
-}
-
-bool Runner::checkReachEdge() {
-	return false;
 }

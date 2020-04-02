@@ -8,18 +8,22 @@ private:
 	const int height_ = 100;
 	int xPos_;
 	int yPos_;
-	int movingVec_; //左右、どちらの方向に走るか
+	int moveLandingVec_; //左右、どちらの方向に走るか
+	bool turningBackTheWay_; //引き返している途中か
 	int boostPower_;
-
-	bool checkReachEdge();
 
 	inline bool canBoost() {
 		return boostPower_ > 0;
 	}
 
+	//スタート地点から反対側の端に到達したら
+	inline bool checkReachOppositeEdge(int windowWidth) {
+		return (xPos_ + width_) >= windowWidth;
+	}
+
 public:
 	Runner(int groundPosY);
-	void run();
+	void run(int windowWidth);
 
 	inline int getWidth() {
 		return width_;
