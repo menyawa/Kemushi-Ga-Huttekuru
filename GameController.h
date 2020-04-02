@@ -42,7 +42,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	int counter = 0;
 	while (ProcessMessage() != error) {
 		backgroundController.drawBackGround();
-		runner.run(gameController.getWindowWidth());
+		runner.move(gameController.getWindowWidth(), backgroundController);
 		Caterpillar::moveAllCaterpillars(backgroundController);
 		Caterpillar::randomSpawn(gameController.getWindowWidth());
 
@@ -51,6 +51,11 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		//60FPSÇ…ìÆçÏÇçáÇÌÇπÇƒÇ¢ÇÈ
 		fps.update();
 		fps.wait();
+
+		int runnerRight = runner.getXPos() + runner.getWidth();
+		int runnerButtom = runner.getYPos() + runner.getHeight();
+
+		if (Caterpillar::caterpillarHittingRunnerIsExists(runner.getXPos(), runnerRight, runner.getYPos(), runnerButtom)) break;
 
 		if (counter == 1000) {
 			break;

@@ -35,12 +35,13 @@ private:
 	}
 
 public:
-	bool checkHitPlayer(int leftTop, int rightTop, int objectTop, int objectButtom);
+	bool isHittingRunner(int leftTop, int rightTop, int objectTop, int objectButtom);
 	void move(BackgroundController& backgroundController);
 
 	static void initStaticField();
 	static void randomSpawn(int windowWidth);
 	static void moveAllCaterpillars(BackgroundController& backgroundController);
+	static bool caterpillarHittingRunnerIsExists(int playerLeft, int playerRight, int playerTop, int playerButtom);
 };
 
 #endif

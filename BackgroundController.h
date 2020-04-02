@@ -17,7 +17,7 @@ public:
 
 	void drawBackGround();
 
-	inline bool checkLandingGround(int topPos, int height) const{
+	inline bool isLandingGround(int topPos, int height) const{
 		return (topPos + height) >= groundPosY_;
 	}
 };

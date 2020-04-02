@@ -156,6 +156,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BackgroundController.cpp" />
+    <ClCompile Include="BoostRunner.cpp" />
     <ClCompile Include="Caterpillar.cpp" />
     <ClCompile Include="Fps.cpp" />
     <ClCompile Include="GameController.cpp" />
@@ -163,6 +164,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BackgroundController.h" />
+    <ClInclude Include="BoostRunner.h" />
     <ClInclude Include="Caterpillar.h" />
     <ClInclude Include="Fps.h" />
     <ClInclude Include="GameController.h" />

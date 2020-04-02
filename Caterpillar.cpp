@@ -19,19 +19,19 @@ Caterpillar::Caterpillar(int spawnXPos, int imageHandleIndex) {
 }
 
 //矩形の当たり判定でプレイヤーに当たったか確認する
-bool Caterpillar::checkHitPlayer(int hitObjectLeft, int hitObjectRight, int hitObjectTop, int hitObjectButtom) {
+bool Caterpillar::isHittingRunner(int runnerLeft, int runnerRight, int runnerTop, int runnerButtom) {
 	int caterpillarLeft = xPos_;
 	int caterpillarRight = xPos_ + width_;
 	int caterpillarLeftButtom = yPos_ + height_;
 
 	bool hit = false;
 	//オブジェクトの右端が左端より右かつ、オブジェクトの左端が右端より左
-	if (hitObjectRight > caterpillarLeft && hitObjectLeft < caterpillarRight) {
+	if (runnerRight > caterpillarLeft && runnerLeft < caterpillarRight) {
 		int caterpillarTop = yPos_;
 		int caterpillarButtom = yPos_ + height_;
 		
 		//上の判定を上端、下端で同じように行う
-		if (caterpillarTop > hitObjectButtom && caterpillarButtom < hitObjectTop) {
+		if (caterpillarTop > runnerButtom && caterpillarButtom < runnerTop) {
 			hit = true;
 		}
 	}
@@ -47,7 +47,7 @@ void Caterpillar::move(BackgroundController& backgroundController) {
 		yPos_++;
 
 		//着地した場合、向いていた方向を向いたまま横向きにする
-		if (backgroundController.checkLandingGround(yPos_, height_)) {
+		if (backgroundController.isLandingGround(yPos_, height_)) {
 			landing_ = true;
 			imageHandle_ = landingImageHandles_[ditectionImageHandleIndex_];
 			swap(width_, height_); //着地するので、横の長さと縦の長さが入れ替わる
@@ -93,4 +93,13 @@ void Caterpillar::moveAllCaterpillars(BackgroundController& backgroundController
 	for (int index = 0; index < caterpillerList_.size(); index++) {
 		caterpillerList_[index]->move(backgroundController);
 	}
+}
+
+//プレイヤーに当たっている毛虫が存在するかどうか
+bool Caterpillar::caterpillarHittingRunnerIsExists(int runnerLeft, int runnerRight, int runnerTop, int runnerButtom) {
+	for (int index = 0; index < caterpillerList_.size(); index++) {
+		if (caterpillerList_[index]->isHittingRunner(runnerLeft, runnerRight, runnerTop, runnerButtom)) return true;
+	}
+
+	return false;
 }

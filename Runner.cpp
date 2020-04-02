@@ -1,29 +1,18 @@
 #include "Dxlib.h"
 #include "Runner.h"
 
-Runner::Runner(int groundPosY) {
+Runner::Runner(int groundPosY) : xPos_(0), yPos_(groundPosY - height_), moveLandingVec_(1), canJump_(true), jumpSpeed_(0), turningBackTheWay_(false), boostRunner_(100) {
 	imageHandle_ = LoadGraph("./Image/Runner.png");
-
-	xPos_ = 0;
-	yPos_ = groundPosY - height_;
 	DrawGraph(xPos_, yPos_, imageHandle_, TRUE);
-	moveLandingVec_ = 1;
-	turningBackTheWay_ = false;
-	boostPower_ = 100;
 }
 
-void Runner::run(int windowWidth) {
-	int movingLength = 1;
-	if (CheckHitKey(KEY_INPUT_SPACE) && canBoost()) {
-		movingLength *= 3;
-		boostPower_--;
-	} else if(CheckHitKey(KEY_INPUT_SPACE) == false){ //キーを離している時に貯まるようにしないと、即座にブースト→通常→ブースト→通常→…と繰り返してしまう
-		boostPower_++;
-	}
-		
-	xPos_ += movingLength * moveLandingVec_;
+void Runner::move(int windowWidth, BackgroundController& backgroundController) {
+	run();
+	boostRunner_.displayGauge(1000, 100);
+	jump(backgroundController.isLandingGround(yPos_, height_), backgroundController.groundPosY_);
 	
-	if (checkReachOppositeEdge(windowWidth)) {
+	//画面端で引き返す
+	if (isReachedOppositeEdge(windowWidth)) {
 		turningBackTheWay_ = true;
 		imageHandle_ = LoadGraph("./Image/TurningBack_TheWay_Runner.png");
 		//ブーストの関係で画面端からはみ出ている可能性もあるので、押し戻す
@@ -34,4 +23,25 @@ void Runner::run(int windowWidth) {
 	}
 
 	DrawGraph(xPos_, yPos_, imageHandle_, TRUE);
+}
+
+//走る(横方向の移動)
+void Runner::run() {
+	int speed = 1;
+	speed = boostRunner_.boostSpeed(speed);
+	xPos_ += speed * moveLandingVec_;
+}
+
+//ジャンプする(縦方向の移動)
+void Runner::jump(bool isLandingGround, int groundPosY) {
+	//if (CheckHitKey(KEY_INPUT_SPACE)) {
+	//	if (isLandingGround && canJump_) {
+	//		canJump_ = false; //ジャンプできるかどうかをとっておかないと、キーを押しながら着地した場合即ジャンプしてしまう
+	//		jumpSpeed_ = 20;
+	//	}
+	//} else {
+	//	if (isLandingGround) canJump_ = true;
+	//}
+
+	//if (isLandingGround) yPos_ = groundPosY - height_; //着地しているのなら、めり込まないよう位置を補正する
 }
