@@ -31,7 +31,7 @@ private:
 
 	//カウントを用いてスポーンの間隔を制御する
 	inline static bool canSpawn() {
-		return spawnCount_ % 50 == 0;
+		return spawnCount_ % 200 == 0;
 	}
 
 public:

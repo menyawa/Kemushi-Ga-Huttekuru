@@ -45,19 +45,15 @@ void Caterpillar::move(BackgroundController& backgroundController) {
 		xPos_ += moveLandingVec_;
 	} else {
 		yPos_++;
+
+		//着地した場合、向いていた方向を向いたまま横向きにする
+		if (backgroundController.checkLandingGround(yPos_, height_)) {
+			landing_ = true;
+			imageHandle_ = landingImageHandles_[ditectionImageHandleIndex_];
+			swap(width_, height_); //着地するので、横の長さと縦の長さが入れ替わる
+			yPos_ = backgroundController.groundPosY_ - height_;
+		}
 	}
-
-	//着地した場合、向いていた方向を向いたまま横向きにする
-
-	//ここで毎回入れ替わっているので振動する
-
-	if (backgroundController.checkLandingGround(yPos_, height_)) {
-		landing_ = true;
-		imageHandle_ = landingImageHandles_[ditectionImageHandleIndex_];
-		swap(width_, height_); //着地するので、横の長さと縦の長さが入れ替わる
-		yPos_ = backgroundController.groundPosY_ - height_;
-	}
-
 	DrawGraph(xPos_, yPos_, imageHandle_, TRUE);
 }
 
@@ -73,7 +69,7 @@ void Caterpillar::initStaticField() {
 	landingImageHandles_[0] = LoadGraph("./Image/Caterpillar_Landing_Left.png");
 	landingImageHandles_[1] = LoadGraph("./Image/Caterpillar_Landing_Right.png");
 
-	spawnCount_ = 1;
+	spawnCount_ = 0;
 }
 
 //新しい毛虫をランダムな位置にスポーンさせる
