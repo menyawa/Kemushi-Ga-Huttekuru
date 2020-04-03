@@ -44,6 +44,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		runner.move(gameController.getWindowWidth(), backgroundController);
 		Caterpillar::moveAllCaterpillars(backgroundController);
 		Caterpillar::randomSpawn(backgroundController.highLightWidth_, gameController.getWindowWidth());
+		runner.boostRunner_.displayGauge(1000, 100); //この位置で表示しないと、表示順の関係上毛虫で隠れてしまう
 		backgroundController.highLightStartPos();
 
 		ScreenFlip();

@@ -12,7 +12,6 @@ private:
 	int xPos_;
 	int yPos_;
 	int moveLandingVec_; //¶‰EA‚Ç‚¿‚ç‚Ì•ûŒü‚É‘–‚é‚©
-	BoostRunner boostRunner_;
 	bool canJump_;
 	int jumpSpeed_;
 	bool turningBackTheWay_; //ˆø‚«•Ô‚µ‚Ä‚¢‚é“r’†‚©
@@ -26,6 +25,8 @@ private:
 	}
 
 public:
+	BoostRunner boostRunner_;
+
 	Runner(int groundPosY);
 	void move(int windowWidth, BackgroundController& backgroundController);
 
