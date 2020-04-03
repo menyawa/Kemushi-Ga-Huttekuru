@@ -6,9 +6,7 @@
 class BoostRunner {
 private:
 	int boostPower_;
-
 	int boostGaugeImageHandle_;
-	int boostGaugeFrameImageHandle_;
 	int boostGaugeBackgroundImageHandle_;
 
 	inline void plusPower() {
@@ -21,6 +19,10 @@ private:
 
 	inline bool canBoost() {
 		return boostPower_ > 0;
+	}
+
+	inline bool canPlusPower() {
+		return boostPower_ < 100;
 	}
 
 public:

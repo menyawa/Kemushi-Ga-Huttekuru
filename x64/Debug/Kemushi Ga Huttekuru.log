@@ -1,2 +1,3 @@
 ﻿  BoostRunner.cpp
+C:\Users\ikejun\Source\Repos\DXLib\Kemushi Ga Huttekuru\BoostRunner.cpp(38,40): warning C4244: '=': 'double' から 'int' への変換です。データが失われる可能性があります。
   Kemushi Ga Huttekuru.vcxproj -> C:\Users\ikejun\Source\Repos\DXLib\Kemushi Ga Huttekuru\x64\Debug\Kemushi Ga Huttekuru.exe
