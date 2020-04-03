@@ -1,8 +1,10 @@
 #include "BoostRunner.h"
 
-BoostRunner::BoostRunner(int maxPower) : boostPower_(maxPower) {
+BoostRunner::BoostRunner() {
 	boostGaugeImageHandle_ = LoadGraph("./File/Image/BoostGauge_Gauge.png");
 	boostGaugeBackgroundImageHandle_ = LoadGraph("./File/Image/BoostGauge_Background.png");
+
+	resetPower();
 }
 
 //キーを押した場合パワーを消費してスピードを上げる

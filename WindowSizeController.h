@@ -13,9 +13,9 @@ public:
 
 	WindowSizeController();
 
-	inline bool isReachedWindowEdge(int xPos, int width) {
-		if (xPos == 0) return true;
-		if (xPos + width >= width_) return true;
+	inline bool isReachedWindowEdge(int right) {
+		if (right <= 0) return true;
+		if (right >= width_) return true;
 
 		return false;
 	}

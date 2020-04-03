@@ -8,11 +8,9 @@
 class Runner {
 private:
 	int imageHandle_;
-	const int width_ = 100;
-	const int height_ = 100;
 	int xPos_;
 	int yPos_;
-	int moveLandingVec_; //左右、どちらの方向に走るか
+	int runningVec_; //左右、どちらの方向に走るか
 	bool canJump_;
 	int jumpSpeed_;
 
@@ -20,9 +18,12 @@ private:
 	void jump(bool isLandingGround, int groundPosY);
 
 public:
+	const int width_ = 100;
+	const int height_ = 100;
 	BoostRunner boostRunner_;
 
 	Runner(int groundPosY);
+	void startRunning(int groundPosY);
 	void move(WindowSizeController& windowSizeController, BackgroundController& backgroundController);
 
 	inline int getXPos() {
@@ -31,14 +32,6 @@ public:
 
 	inline int getYPos() {
 		return yPos_;
-	}
-
-	inline int getWidth() {
-		return width_;
-	}
-
-	inline int getHeight() {
-		return height_;
 	}
 };
 

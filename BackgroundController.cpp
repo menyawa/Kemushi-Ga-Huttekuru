@@ -14,6 +14,7 @@ void BackgroundController::drawStageBackGround() {
 	DrawGraph(backgroundPos, groundYPos_, groundImageHandle_, TRUE);
 }
 
+//g‚í‚È‚­‚È‚Á‚½‚ªAˆê‰‚Æ‚Á‚Ä‚¨‚­
 void BackgroundController::highLightStartPos() {
 	const int xPos = 0;
 	const int yPos = groundYPos_ - highLightWidth_;

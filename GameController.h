@@ -33,11 +33,12 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		backgroundController.drawStageBackGround();
 		runner.move(windowSizeController, backgroundController);
 		Caterpillar::moveAllCaterpillars(backgroundController);
-		Caterpillar::randomSpawn(backgroundController.highLightWidth_, windowSizeController.width_);
+		Caterpillar::randomSpawn(windowSizeController.width_);
+
+		//この位置で表示しないと、表示順の関係上毛虫で隠れてしまう
 		playerScore.plusScore();
 		playerScore.printScore();
-		runner.boostRunner_.displayGauge(); //この位置で表示しないと、表示順の関係上毛虫で隠れてしまう
-		backgroundController.highLightStartPos();
+		runner.boostRunner_.displayGauge(); 
 
 		ScreenFlip();
 
@@ -45,9 +46,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		fps.update();
 		fps.wait();
 
-		int runnerRight = runner.getXPos() + runner.getWidth();
-		int runnerButtom = runner.getYPos() + runner.getHeight();
-
+		//画面を更新したあとに判定を行わないと「当たってないのに当たっている」ということになるので注意
+		int runnerRight = runner.getXPos() + runner.width_;
+		int runnerButtom = runner.getYPos() + runner.height_;
 		if (Caterpillar::caterpillarHittingRunnerIsExists(runner.getXPos(), runnerRight, runner.getYPos(), runnerButtom)) break;
 
 		if (counter == 1000) {

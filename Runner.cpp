@@ -1,9 +1,21 @@
 #include "Dxlib.h"
 #include "Runner.h"
 
-Runner::Runner(int groundPosY) : xPos_(0), yPos_(groundPosY - height_), moveLandingVec_(1), canJump_(true), jumpSpeed_(0), boostRunner_(100) {
+Runner::Runner(int groundPosY) {
+	startRunning(groundPosY);
+}
+
+//スタートする
+//一回クリアした後のリスタート時も使い回せるようメソッド化
+void Runner::startRunning(int groundPosY) {
 	imageHandle_ = LoadGraph("./File/Image/Runner.png");
-	DrawGraph(xPos_, yPos_, imageHandle_, TRUE);
+	xPos_ = width_ * -1; //画面外からスタート
+	yPos_ = groundPosY - height_;
+	
+	runningVec_ = 1;
+	canJump_ = true;
+	jumpSpeed_ = 0;
+	boostRunner_.resetPower();
 }
 
 void Runner::move(WindowSizeController& windowSizeController, BackgroundController& backgroundController) {
@@ -11,7 +23,7 @@ void Runner::move(WindowSizeController& windowSizeController, BackgroundControll
 	jump(backgroundController.isLandingGround(yPos_, height_), backgroundController.groundYPos_);
 	
 	//画面端にたどり着いたら
-	if (windowSizeController.isReachedWindowEdge(xPos_, width_)) {
+	if (windowSizeController.isReachedWindowEdge(xPos_ + width_)) {
 		if (xPos_ <= 0) {
 			xPos_ = 0;
 		} else {
@@ -22,7 +34,7 @@ void Runner::move(WindowSizeController& windowSizeController, BackgroundControll
 			int widthOfOutSideFromEdge = width_ - (windowSizeController.width_ - xPos_);
 			xPos_ = windowSizeController.width_ - width_ - widthOfOutSideFromEdge;
 		}
-		moveLandingVec_ *= -1;
+		runningVec_ *= -1;
 	}
 
 	DrawGraph(xPos_, yPos_, imageHandle_, TRUE);
@@ -32,7 +44,7 @@ void Runner::move(WindowSizeController& windowSizeController, BackgroundControll
 void Runner::run() {
 	int speed = 1;
 	speed = boostRunner_.boostSpeed(speed);
-	xPos_ += speed * moveLandingVec_;
+	xPos_ += speed * runningVec_;
 }
 
 //ジャンプする(縦方向の移動)

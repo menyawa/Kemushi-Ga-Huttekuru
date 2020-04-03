@@ -26,10 +26,14 @@ private:
 	}
 
 public:
-	BoostRunner(int maxPower);
+	BoostRunner();
 
 	int boostSpeed(int nomalSpeed);
 	void displayGauge();
+
+	inline void resetPower() {
+		boostPower_ = 100;
+	}
 };
 
 #endif
