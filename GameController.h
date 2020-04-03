@@ -2,26 +2,14 @@
 #define GaemController_Included
 
 #include "DxLib.h"
+#include "WindowSizeController.h"
 #include "BackgroundController.h"
 #include "Fps.h"
 #include "Runner.h"
 #include "Caterpillar.h"
 
 class GameController {
-private:
-	const int windowWidth = 1280;
-	const int windowHeight = 720;
 
-public:
-	GameController();
-	void initWindow();
-
-	int getWindowWidth() {
-		return windowWidth;
-	}
-	int getWindowHeight() {
-		return windowHeight;
-	}
 };
 
 #endif
@@ -32,7 +20,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	if (DxLib_Init() == error) {
 		return error;
 	}
-	GameController gameController;
+	WindowSizeController windowSizeController;
 	BackgroundController backgroundController;
 	Fps fps;
 	Caterpillar::initStaticField();
@@ -41,9 +29,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	int counter = 0;
 	while (ProcessMessage() != error) {
 		backgroundController.drawStageBackGround();
-		runner.move(gameController.getWindowWidth(), backgroundController);
+		runner.move(windowSizeController, backgroundController);
 		Caterpillar::moveAllCaterpillars(backgroundController);
-		Caterpillar::randomSpawn(backgroundController.highLightWidth_, gameController.getWindowWidth());
+		Caterpillar::randomSpawn(backgroundController.highLightWidth_, windowSizeController.width_);
 		runner.boostRunner_.displayGauge(1000, 100); //この位置で表示しないと、表示順の関係上毛虫で隠れてしまう
 		backgroundController.highLightStartPos();
 

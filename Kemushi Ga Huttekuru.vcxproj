@@ -161,6 +161,7 @@
     <ClCompile Include="Fps.cpp" />
     <ClCompile Include="GameController.cpp" />
     <ClCompile Include="Runner.cpp" />
+    <ClCompile Include="WindowSizeController.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BackgroundController.h" />
@@ -169,6 +170,7 @@
     <ClInclude Include="Fps.h" />
     <ClInclude Include="GameController.h" />
     <ClInclude Include="Runner.h" />
+    <ClInclude Include="WindowSizeController.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,6 +1,7 @@
 #ifndef Runner_Included
 #define Runner_Included
 
+#include "WindowSizeController.h"
 #include "BackgroundController.h"
 #include "BoostRunner.h"
 
@@ -14,21 +15,15 @@ private:
 	int moveLandingVec_; //左右、どちらの方向に走るか
 	bool canJump_;
 	int jumpSpeed_;
-	bool turningBackTheWay_; //引き返している途中か
 
 	void run();
 	void jump(bool isLandingGround, int groundPosY);
-
-	//スタート地点から反対側の端に到達しているか
-	inline bool isReachedOppositeEdge(int windowWidth) {
-		return (xPos_ + width_) >= windowWidth;
-	}
 
 public:
 	BoostRunner boostRunner_;
 
 	Runner(int groundPosY);
-	void move(int windowWidth, BackgroundController& backgroundController);
+	void move(WindowSizeController& windowSizeController, BackgroundController& backgroundController);
 
 	inline int getXPos() {
 		return xPos_;
