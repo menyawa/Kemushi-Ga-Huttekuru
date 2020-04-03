@@ -29,7 +29,7 @@ public:
 	BoostRunner(int maxPower);
 
 	int boostSpeed(int nomalSpeed);
-	void displayGauge(int xPos, int yPos);
+	void displayGauge();
 };
 
 #endif

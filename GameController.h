@@ -5,6 +5,7 @@
 #include "WindowSizeController.h"
 #include "BackgroundController.h"
 #include "Fps.h"
+#include "PlayerScore.h"
 #include "Runner.h"
 #include "Caterpillar.h"
 
@@ -23,6 +24,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	WindowSizeController windowSizeController;
 	BackgroundController backgroundController;
 	Fps fps;
+	PlayerScore playerScore;
 	Caterpillar::initStaticField();
 	Runner runner(backgroundController.groundYPos_);
 
@@ -32,7 +34,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		runner.move(windowSizeController, backgroundController);
 		Caterpillar::moveAllCaterpillars(backgroundController);
 		Caterpillar::randomSpawn(backgroundController.highLightWidth_, windowSizeController.width_);
-		runner.boostRunner_.displayGauge(1000, 100); //この位置で表示しないと、表示順の関係上毛虫で隠れてしまう
+		playerScore.plusScore();
+		playerScore.printScore();
+		runner.boostRunner_.displayGauge(); //この位置で表示しないと、表示順の関係上毛虫で隠れてしまう
 		backgroundController.highLightStartPos();
 
 		ScreenFlip();

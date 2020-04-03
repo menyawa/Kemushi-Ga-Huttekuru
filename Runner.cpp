@@ -2,7 +2,7 @@
 #include "Runner.h"
 
 Runner::Runner(int groundPosY) : xPos_(0), yPos_(groundPosY - height_), moveLandingVec_(1), canJump_(true), jumpSpeed_(0), boostRunner_(100) {
-	imageHandle_ = LoadGraph("./Image/Runner.png");
+	imageHandle_ = LoadGraph("./File/Image/Runner.png");
 	DrawGraph(xPos_, yPos_, imageHandle_, TRUE);
 }
 
@@ -16,7 +16,7 @@ void Runner::move(WindowSizeController& windowSizeController, BackgroundControll
 			xPos_ = 0;
 		} else {
 			//スタート地点から反対側の端で引き返す
-			imageHandle_ = LoadGraph("./Image/TurningBack_TheWay_Runner.png");
+			imageHandle_ = LoadGraph("./File/Image/TurningBack_TheWay_Runner.png");
 			//ブーストの関係で画面端からはみ出ている可能性もあるので、押し戻す
 			//その際、多少跳ね返るような挙動をすることに注意(はみ出ている分更に戻るので、画面端ピッタリの位置にはならないことがある)
 			int widthOfOutSideFromEdge = width_ - (windowSizeController.width_ - xPos_);

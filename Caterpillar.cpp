@@ -59,10 +59,10 @@ void Caterpillar::initStaticField() {
 	mtRand_.seed(randomDevice());
 
 	//コンパイル時値が確定しないため、constでの指定は使えないことに注意
-	fallingImageHandles_[0] = LoadGraph("./Image/Caterpillar_Falling_Left.png");
-	fallingImageHandles_[1] = LoadGraph("./Image/Caterpillar_Falling_Right.png");
-	landingImageHandles_[0] = LoadGraph("./Image/Caterpillar_Landing_Left.png");
-	landingImageHandles_[1] = LoadGraph("./Image/Caterpillar_Landing_Right.png");
+	fallingImageHandles_[0] = LoadGraph("./File/Image/Caterpillar_Falling_Left.png");
+	fallingImageHandles_[1] = LoadGraph("./File/Image/Caterpillar_Falling_Right.png");
+	landingImageHandles_[0] = LoadGraph("./File/Image/Caterpillar_Landing_Left.png");
+	landingImageHandles_[1] = LoadGraph("./File/Image/Caterpillar_Landing_Right.png");
 
 	spawnCount_ = 0;
 }

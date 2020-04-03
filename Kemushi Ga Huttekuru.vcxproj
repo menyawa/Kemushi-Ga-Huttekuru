@@ -160,6 +160,7 @@
     <ClCompile Include="Caterpillar.cpp" />
     <ClCompile Include="Fps.cpp" />
     <ClCompile Include="GameController.cpp" />
+    <ClCompile Include="PlayerScore.cpp" />
     <ClCompile Include="Runner.cpp" />
     <ClCompile Include="WindowSizeController.cpp" />
   </ItemGroup>
@@ -169,6 +170,7 @@
     <ClInclude Include="Caterpillar.h" />
     <ClInclude Include="Fps.h" />
     <ClInclude Include="GameController.h" />
+    <ClInclude Include="PlayerScore.h" />
     <ClInclude Include="Runner.h" />
     <ClInclude Include="WindowSizeController.h" />
   </ItemGroup>

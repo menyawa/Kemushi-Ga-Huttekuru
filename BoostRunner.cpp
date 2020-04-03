@@ -1,8 +1,8 @@
 #include "BoostRunner.h"
 
 BoostRunner::BoostRunner(int maxPower) : boostPower_(maxPower) {
-	boostGaugeImageHandle_ = LoadGraph("./Image/BoostGauge_Gauge.png");
-	boostGaugeBackgroundImageHandle_ = LoadGraph("./Image/BoostGauge_Background.png");
+	boostGaugeImageHandle_ = LoadGraph("./File/Image/BoostGauge_Gauge.png");
+	boostGaugeBackgroundImageHandle_ = LoadGraph("./File/Image/BoostGauge_Background.png");
 }
 
 //キーを押した場合パワーを消費してスピードを上げる
@@ -20,13 +20,15 @@ int BoostRunner::boostSpeed(int nomalSpeed) {
 	return runningSpeed;
 }
 
-void BoostRunner::displayGauge(int gaugeBackgroundXPos, int gaugeBackgroundYPos) {
+void BoostRunner::displayGauge() {
 	int gaugeBackgroundWidth, gaugeBackgroundHeight;
 	GetGraphSize(boostGaugeBackgroundImageHandle_, &gaugeBackgroundWidth, &gaugeBackgroundHeight);
 	gaugeBackgroundWidth /= 20;
 	gaugeBackgroundHeight /= 20;
 
 	//描画順がゲージ背景→ゲージとなるよう注意
+	const int gaugeBackgroundXPos = 1000;
+	const int gaugeBackgroundYPos = 70;
 	DrawExtendGraph(gaugeBackgroundXPos, gaugeBackgroundYPos, gaugeBackgroundXPos + gaugeBackgroundWidth, gaugeBackgroundYPos + gaugeBackgroundHeight, boostGaugeBackgroundImageHandle_, TRUE);
 	//ゲージと枠の間にはマージンがあることに注意
 	const int gaugeXPos = gaugeBackgroundXPos + 5;

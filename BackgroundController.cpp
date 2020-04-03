@@ -2,9 +2,9 @@
 
 //LoadGraphはDXライブラリの関数なので、DXライブラリ初期化前には使えないことに注意
 BackgroundController::BackgroundController() {
-	backgroundImageHandle_ = LoadGraph("./Image/Background.png");
-	groundImageHandle_ = LoadGraph("./Image/Ground.png");
-	highLightImageHandle_ = LoadGraph("./Image/HighLightStartPos.png");
+	backgroundImageHandle_ = LoadGraph("./File/Image/Background.png");
+	groundImageHandle_ = LoadGraph("./File/Image/Ground.png");
+	highLightImageHandle_ = LoadGraph("./File/Image/HighLightStartPos.png");
 }
 
 void BackgroundController::drawStageBackGround() {
