@@ -6,16 +6,11 @@ int Caterpillar::fallingImageHandles_[2];
 int Caterpillar::landingImageHandles_[2];
 int Caterpillar::spawnCount_;
 
-
-Caterpillar::Caterpillar(int spawnXPos, int imageHandleIndex) {
+Caterpillar::Caterpillar(int spawnXPos, int imageHandleIndex) : ditectionImageHandleIndex_(imageHandleIndex), xPos_(spawnXPos), yPos_(0), landing_(false){
 	imageHandle_ = fallingImageHandles_[imageHandleIndex];
-	ditectionImageHandleIndex_ = imageHandleIndex;
-	xPos_ = spawnXPos;
-	yPos_ = 0;
 	GetGraphSize(imageHandle_, &width_, &height_);
 	DrawGraph(spawnXPos, yPos_, fallingImageHandles_[imageHandleIndex], TRUE);
 	moveLandingVec_ = ditectionImageHandleIndex_ == 0 ? -1 : 1; //左向きか右向きかで着地後の移動方向が変わる
-	landing_ = false;
 }
 
 //矩形の当たり判定でプレイヤーに当たったか確認する
