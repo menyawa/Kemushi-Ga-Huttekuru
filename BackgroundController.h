@@ -7,18 +7,20 @@
 //C#でいう静的クラスみたいにしようと思ったんだけど…C++はconstの値も変更できる関係で、constメンバ変数を参照するにはインスタンス経由で参照しないといけないらしいので素直にメンバ関数化
 class BackgroundController {
 private:
-	static int backgroundImageHandle_;
-	static int groundImageHandle_;
+	int backgroundImageHandle_;
+	int groundImageHandle_;
+	int highLightImageHandle_;
 
 public:
-	const int groundPosY_ = 600;
+	const int groundYPos_ = 600;
+	const int highLightWidth_ = 100;
 	
-	static void initImageHandle();
-
-	void drawBackGround();
+	BackgroundController();
+	void drawStageBackGround();
+	void highLightStartPos();
 
 	inline bool isLandingGround(int topPos, int height) const{
-		return (topPos + height) >= groundPosY_;
+		return (topPos + height) >= groundYPos_;
 	}
 };
 

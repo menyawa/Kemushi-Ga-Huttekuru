@@ -9,7 +9,7 @@ Runner::Runner(int groundPosY) : xPos_(0), yPos_(groundPosY - height_), moveLand
 void Runner::move(int windowWidth, BackgroundController& backgroundController) {
 	run();
 	boostRunner_.displayGauge(1000, 100);
-	jump(backgroundController.isLandingGround(yPos_, height_), backgroundController.groundPosY_);
+	jump(backgroundController.isLandingGround(yPos_, height_), backgroundController.groundYPos_);
 	
 	//‰æ–Ê’[‚Åˆø‚«•Ô‚·
 	if (isReachedOppositeEdge(windowWidth)) {

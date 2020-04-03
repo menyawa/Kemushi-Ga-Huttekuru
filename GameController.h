@@ -34,17 +34,17 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	}
 	GameController gameController;
 	BackgroundController backgroundController;
-	BackgroundController::initImageHandle();
 	Fps fps;
 	Caterpillar::initStaticField();
-	Runner runner(backgroundController.groundPosY_);
+	Runner runner(backgroundController.groundYPos_);
 
 	int counter = 0;
 	while (ProcessMessage() != error) {
-		backgroundController.drawBackGround();
+		backgroundController.drawStageBackGround();
 		runner.move(gameController.getWindowWidth(), backgroundController);
 		Caterpillar::moveAllCaterpillars(backgroundController);
-		Caterpillar::randomSpawn(gameController.getWindowWidth());
+		Caterpillar::randomSpawn(backgroundController.highLightWidth_, gameController.getWindowWidth());
+		backgroundController.highLightStartPos();
 
 		ScreenFlip();
 

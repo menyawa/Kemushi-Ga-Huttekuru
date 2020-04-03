@@ -46,7 +46,7 @@ void Caterpillar::move(BackgroundController& backgroundController) {
 			landing_ = true;
 			imageHandle_ = landingImageHandles_[ditectionImageHandleIndex_];
 			swap(width_, height_); //着地するので、横の長さと縦の長さが入れ替わる
-			yPos_ = backgroundController.groundPosY_ - height_;
+			yPos_ = backgroundController.groundYPos_ - height_;
 		}
 	}
 	DrawGraph(xPos_, yPos_, imageHandle_, TRUE);
@@ -68,7 +68,7 @@ void Caterpillar::initStaticField() {
 }
 
 //新しい毛虫をランダムな位置にスポーンさせる
-void Caterpillar::randomSpawn(int windowSizeX) {
+void Caterpillar::randomSpawn(int highLightStartPosWidth, int windowWidth) {
 	spawnCount_++; //ここでカウントを+1しておかないと、一度スポーンできるようになったらそのまま続けてスポーンできてしまう
 	if (canSpawn() == false) {
 		return;
@@ -76,7 +76,7 @@ void Caterpillar::randomSpawn(int windowSizeX) {
 
 	int fallingCaterpillarWidth = 66;
 	//一様分布乱数生成器を作り、その後それに乱数生成器を渡してスポーン位置を決める
-	uniform_int_distribution<> spawnPosRandDistribution(0, windowSizeX - fallingCaterpillarWidth);
+	uniform_int_distribution<> spawnPosRandDistribution(highLightStartPosWidth, windowWidth - fallingCaterpillarWidth);
 	int spawnXPos = spawnPosRandDistribution(mtRand_);
 	//同様に、左右どちらを向くかのインデックスを決める
 	uniform_int_distribution<> fallingRandDistribution(0, 1);

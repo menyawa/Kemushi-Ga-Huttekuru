@@ -39,7 +39,7 @@ public:
 	void move(BackgroundController& backgroundController);
 
 	static void initStaticField();
-	static void randomSpawn(int windowWidth);
+	static void randomSpawn(int highLightStartPosWidth, int windowWidth);
 	static void moveAllCaterpillars(BackgroundController& backgroundController);
 	static bool caterpillarHittingRunnerIsExists(int playerLeft, int playerRight, int playerTop, int playerButtom);
 };
