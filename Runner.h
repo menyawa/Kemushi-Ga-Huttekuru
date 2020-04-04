@@ -16,7 +16,7 @@ private:
 	int jumpSpeed_;
 
 	void run();
-	void jump(bool isLandingGround, int groundPosY);
+	void jump(BackgroundController& backgroundController, int groundPosY);
 
 public:
 	//画像サイズそのままだと、余白の分当たり判定が広がってしまうので注意

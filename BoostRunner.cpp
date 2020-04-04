@@ -12,7 +12,7 @@ int BoostRunner::boostSpeed(int nomalSpeed) {
 	int runningSpeed = nomalSpeed;
 	if (CheckHitKey(KEY_INPUT_D)) {
 		if (canBoost()) {
-			runningSpeed *= 3;
+			runningSpeed *= 6;
 			minusPower();
 		}
 	} else { //キーを離している時に貯まるようにしないと、即座にブースト→通常→ブースト→通常→…と繰り返してしまう

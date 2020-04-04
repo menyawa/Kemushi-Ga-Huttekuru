@@ -20,7 +20,7 @@ void Runner::startRunning(int groundPosY) {
 
 void Runner::move(WindowSizeController& windowSizeController, BackgroundController& backgroundController) {
 	run();
-	jump(backgroundController.isLandingGround(getTop(), height_), backgroundController.groundYPos_);
+	jump(backgroundController, backgroundController.groundYPos_);
 	
 	//画面端にたどり着いたら
 	if (windowSizeController.isReachedEdge(getRight())) {
@@ -46,15 +46,28 @@ void Runner::run() {
 }
 
 //ジャンプする(縦方向の移動)
-void Runner::jump(bool isLandingGround, int groundPosY) {
-	//if (CheckHitKey(KEY_INPUT_SPACE)) {
-	//	if (isLandingGround && canJump_) {
-	//		canJump_ = false; //ジャンプできるかどうかをとっておかないと、キーを押しながら着地した場合即ジャンプしてしまう
-	//		jumpSpeed_ = 20;
-	//	}
-	//} else {
-	//	if (isLandingGround) canJump_ = true;
-	//}
+void Runner::jump(BackgroundController& backgroundController, int groundPosY) {
+	bool isLandingGround = backgroundController.isLandingGround(getTop(), height_);
+	int acc = 0; 
+	if (CheckHitKey(KEY_INPUT_SPACE)) {
+		if (isLandingGround && canJump_) {
+			canJump_ = false; 
+			jumpSpeed_ = -25;
+		} else {
+			acc--; //空中で押している間は上に加速度をかけることで、押している長さで高さの調整ができるようにする
+			//TODO:空中で離したあとまた押したら加速度がかかってしまうので直す
+		}
+	} else {
+		if (isLandingGround) canJump_ = true; //ジャンプできるかどうかをとっておかないと、キーを押しながら着地した場合即ジャンプしてしまう
+	}
 
-	//if (isLandingGround) yPos_ = groundPosY - height_; //着地しているのなら、めり込まないよう位置を補正する
+	const int g = 2;
+	jumpSpeed_ += acc + g;
+	yPos_ += jumpSpeed_;
+
+	isLandingGround = backgroundController.isLandingGround(getTop(), height_);
+	//更新後の座標で着地しているか見ないと、更新前の段階で地面に設置していたらジャンプできなくなる
+	if (isLandingGround) {
+		yPos_ = groundPosY - height_ - margin_; //着地しているのなら、めり込まないよう位置を補正する
+	}
 }
