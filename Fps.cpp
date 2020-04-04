@@ -1,9 +1,7 @@
 #include "Fps.h"
 
-Fps::Fps() {
+Fps::Fps() : count_(0), trueFps_(0){
 	startTime_ = GetNowCount();
-	count_ = 0;
-	trueFps_ = 0;
 }
 
 void Fps::update() {

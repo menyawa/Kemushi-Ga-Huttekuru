@@ -4,6 +4,7 @@
 #include "DxLib.h"
 #include "WindowSizeController.h"
 #include "BackgroundController.h"
+#include "Title.h"
 #include "Fps.h"
 #include "PlayerScore.h"
 #include "Runner.h"
@@ -11,7 +12,6 @@
 #include "GameEnd.h"
 
 class GameController {
-
 };
 
 #endif
@@ -24,14 +24,20 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	}
 	WindowSizeController windowSizeController;
 	BackgroundController backgroundController;
+	Title title;
 	Fps fps;
 	PlayerScore playerScore;
 	Caterpillar::initStaticField();
 	Runner runner(backgroundController.groundYPos_);
-	PlaySoundFile("./File/mp3/8bit.mp3", DX_PLAYTYPE_LOOP);
 
 	int counter = 0;
 	while (ProcessMessage() != error) {
+		//タイトル画面をまだ見ていない(ゲーム開始時)・タイトルに戻った際、タイトルを表示
+		if (title.canSeenTitle()) {
+			title.drawTitle();
+		}
+
+		//ここからゲーム画面
 		backgroundController.drawStageBackGround();
 		runner.move(windowSizeController, backgroundController);
 		Caterpillar::moveAllCaterpillars(backgroundController);
@@ -48,16 +54,17 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		fps.update();
 		fps.wait();
 
+		//ゲームクリアしたか(スタート地点画面外まで逃げ切ったか)判定
 		if (windowSizeController.isReachedWindowEdge(runner.getXPos() + runner.width_)) {
 			if (runner.getXPos() <= 0) {
 				GameEnd gameEnd;
 				if (gameEnd.selectPlayingNextStage()) {
 					Caterpillar::resetCaterpillarsList();	
 					runner.startRunning(backgroundController.groundYPos_);
-					continue;
 				} else {
-					break;
+					title.switchHasSeenTitleFlag();
 				}
+				continue;
 			}
 		}
 
