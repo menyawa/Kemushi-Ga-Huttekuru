@@ -8,6 +8,7 @@
 #include "PlayerScore.h"
 #include "Runner.h"
 #include "Caterpillar.h"
+#include "GameEnd.h"
 
 class GameController {
 
@@ -46,6 +47,14 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		fps.update();
 		fps.wait();
 
+		if (windowSizeController.isReachedWindowEdge(runner.getXPos() + runner.width_)) {
+			if (runner.getXPos() <= 0) {
+				GameEnd gameEnd;
+				gameEnd.continueGame();
+			}
+		}
+
+		//ゲームクリア判定後に行わないと、逃げ切りが行えないので注意
 		//画面を更新したあとに判定を行わないと「当たってないのに当たっている」ということになるので注意
 		int runnerRight = runner.getXPos() + runner.width_;
 		int runnerButtom = runner.getYPos() + runner.height_;

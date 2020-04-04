@@ -42,6 +42,11 @@ public:
 	static void randomSpawn(int windowWidth);
 	static void moveAllCaterpillars(BackgroundController& backgroundController);
 	static bool caterpillarHittingRunnerIsExists(int playerLeft, int playerRight, int playerTop, int playerButtom);
+
+	inline static void resetCaterpillarsList() {
+		caterpillerList_.clear();
+		caterpillerList_.shrink_to_fit();
+	}
 };
 
 #endif
