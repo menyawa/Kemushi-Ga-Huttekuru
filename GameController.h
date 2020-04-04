@@ -28,6 +28,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	PlayerScore playerScore;
 	Caterpillar::initStaticField();
 	Runner runner(backgroundController.groundYPos_);
+	PlaySoundFile("./File/mp3/8bit.mp3", DX_PLAYTYPE_LOOP);
 
 	int counter = 0;
 	while (ProcessMessage() != error) {
