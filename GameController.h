@@ -55,8 +55,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		fps.wait();
 
 		//ゲームクリアしたか(スタート地点画面外まで逃げ切ったか)判定
-		if (windowSizeController.isReachedWindowEdge(runner.getXPos() + runner.width_)) {
-			if (runner.getXPos() <= 0) {
+		if (windowSizeController.isReachedWindowEdge(runner.getRight())) {
+			if (runner.getLeft() <= 0) {
 				GameEnd gameEnd;
 				if (gameEnd.selectPlayingNextStage()) {
 					Caterpillar::resetCaterpillarsList();	
@@ -70,9 +70,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 		//ゲームクリア判定後に行わないと、逃げ切りが行えないので注意
 		//画面を更新したあとに判定を行わないと「当たってないのに当たっている」ということになるので注意
-		int runnerRight = runner.getXPos() + runner.width_;
-		int runnerButtom = runner.getYPos() + runner.height_;
-		if (Caterpillar::caterpillarHittingRunnerIsExists(runner.getXPos(), runnerRight, runner.getYPos(), runnerButtom)) break;
+		if (Caterpillar::caterpillarHittingRunnerIsExists(runner.getLeft(), runner.getRight(), runner.getTop(), runner.getButtom())) break;
 
 		if (counter == 1000) {
 			break;
@@ -82,7 +80,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	}
 
 	WaitKey();
-
 	DxLib_End();
 
 	return 0;

@@ -6,27 +6,25 @@ int Caterpillar::fallingImageHandles_[2];
 int Caterpillar::landingImageHandles_[2];
 int Caterpillar::spawnCount_;
 
-Caterpillar::Caterpillar(int spawnXPos, int imageHandleIndex) : ditectionImageHandleIndex_(imageHandleIndex), xPos_(spawnXPos), yPos_(0), landing_(false){
+Caterpillar::Caterpillar(int spawnXPos, int imageHandleIndex) : ditectionImageHandleIndex_(imageHandleIndex), xPos_(spawnXPos), yPos_(0), width_(60), height_(90), landing_(false){
 	imageHandle_ = fallingImageHandles_[imageHandleIndex];
-	GetGraphSize(imageHandle_, &width_, &height_);
 	DrawGraph(spawnXPos, yPos_, fallingImageHandles_[imageHandleIndex], TRUE);
 	moveLandingVec_ = ditectionImageHandleIndex_ == 0 ? -1 : 1; //左向きか右向きかで着地後の移動方向が変わる
 }
 
 //矩形の当たり判定でプレイヤーに当たったか確認する
 bool Caterpillar::isHittingRunner(int runnerLeft, int runnerRight, int runnerTop, int runnerButtom) {
-	int caterpillarLeft = xPos_;
-	int caterpillarRight = xPos_ + width_;
-	int caterpillarLeftButtom = yPos_ + height_;
+	int caterpillarLeft = xPos_ + margin_;
+	int caterpillarRight = caterpillarLeft + width_;
 
 	bool hit = false;
 	//オブジェクトの右端が左端より右かつ、オブジェクトの左端が右端より左
 	if (runnerRight > caterpillarLeft && runnerLeft < caterpillarRight) {
-		int caterpillarTop = yPos_;
-		int caterpillarButtom = yPos_ + height_;
+		int caterpillarTop = yPos_ + margin_;
+		int caterpillarButtom = caterpillarTop + height_;
 		
 		//上の判定を上端、下端で同じように行う
-		if (caterpillarTop > runnerButtom && caterpillarButtom < runnerTop) {
+		if (caterpillarTop < runnerButtom && caterpillarButtom > runnerTop) {
 			hit = true;
 		}
 	}
@@ -42,11 +40,11 @@ void Caterpillar::move(BackgroundController& backgroundController) {
 		yPos_++;
 
 		//着地した場合、向いていた方向を向いたまま横向きにする
-		if (backgroundController.isLandingGround(yPos_, height_)) {
+		if (backgroundController.isLandingGround(yPos_ + margin_, height_)) {
 			landing_ = true;
 			imageHandle_ = landingImageHandles_[ditectionImageHandleIndex_];
 			swap(width_, height_); //着地するので、横の長さと縦の長さが入れ替わる
-			yPos_ = backgroundController.groundYPos_ - height_;
+			yPos_ = backgroundController.groundYPos_ - height_ - margin_;
 		}
 	}
 	DrawGraph(xPos_, yPos_, imageHandle_, TRUE);

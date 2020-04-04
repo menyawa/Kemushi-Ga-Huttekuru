@@ -9,8 +9,8 @@ Runner::Runner(int groundPosY) {
 //一回クリアした後のリスタート時も使い回せるようメソッド化
 void Runner::startRunning(int groundPosY) {
 	imageHandle_ = LoadGraph("./File/Image/Runner.png");
-	xPos_ = width_ * -1; //画面外からスタート
-	yPos_ = groundPosY - height_;
+	xPos_ = width_ * -1 - margin_; //画面外からスタート
+	yPos_ = groundPosY - height_ - margin_;
 	
 	runningVec_ = 1;
 	canJump_ = true;
@@ -20,18 +20,16 @@ void Runner::startRunning(int groundPosY) {
 
 void Runner::move(WindowSizeController& windowSizeController, BackgroundController& backgroundController) {
 	run();
-	jump(backgroundController.isLandingGround(yPos_, height_), backgroundController.groundYPos_);
+	jump(backgroundController.isLandingGround(getTop(), height_), backgroundController.groundYPos_);
 	
 	//画面端にたどり着いたら
-	if (windowSizeController.isReachedWindowEdge(xPos_ + width_)) {
-		if (xPos_ <= 0) {
-			xPos_ = 0;
-		} else {
+	if (windowSizeController.isReachedWindowEdge(getRight())) {
+		if (xPos_ > 0) {
 			//スタート地点から反対側の端で引き返す
 			imageHandle_ = LoadGraph("./File/Image/TurningBack_TheWay_Runner.png");
 			//ブーストの関係で画面端からはみ出ている可能性もあるので、押し戻す
 			//その際、多少跳ね返るような挙動をすることに注意(はみ出ている分更に戻るので、画面端ピッタリの位置にはならないことがある)
-			int widthOfOutSideFromEdge = width_ - (windowSizeController.width_ - xPos_);
+			int widthOfOutSideFromEdge = getRight() - windowSizeController.width_;
 			xPos_ = windowSizeController.width_ - width_ - widthOfOutSideFromEdge;
 		}
 		runningVec_ *= -1;

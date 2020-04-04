@@ -16,8 +16,10 @@ private:
 	int ditectionImageHandleIndex_; //左右どちらを向いているかのインデックスを保存する(着地時にその向きで移動するため)
 	int xPos_;
 	int yPos_;
-	int width_;
-	int height_;
+	const int margin_ = 5;
+	//画像サイズそのままだと、余白の分当たり判定が広がってしまうので注意
+	int width_ = 60;
+	int height_ = 90;
 	int moveLandingVec_; //地面に着地した後の進行方向。もっといい名前があると思う
 	bool landing_;
 
