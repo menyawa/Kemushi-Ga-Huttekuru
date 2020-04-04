@@ -3,6 +3,9 @@
 
 #include "DxLib.h"
 #include "Caterpillar.h"
+#include "Title.h"
+#include "PlayerScore.h"
+#include "Runner.h"
 
 class GameEnd {
 private:
@@ -13,7 +16,11 @@ private:
 public:
 	GameEnd();
 
+	void drawClearMenu();
+	void drawGameOverMenu();
+
 	bool selectPlayingNextStage();
+	void retryGame(int groundPosY, Runner& runner);
 };
 
 #endif

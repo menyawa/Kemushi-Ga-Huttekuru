@@ -13,7 +13,7 @@ public:
 
 	WindowSizeController();
 
-	inline bool isReachedWindowEdge(int right) {
+	inline bool isReachedEdge(int right) {
 		if (right <= 0) return true;
 		if (right >= width_) return true;
 

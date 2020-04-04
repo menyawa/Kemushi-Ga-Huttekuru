@@ -29,8 +29,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	PlayerScore playerScore;
 	Caterpillar::initStaticField();
 	Runner runner(backgroundController.groundYPos_);
+	GameEnd gameEnd;
 
-	int counter = 0;
 	while (ProcessMessage() != error) {
 		//タイトル画面をまだ見ていない(ゲーム開始時)・タイトルに戻った際、タイトルを表示
 		if (title.canSeenTitle()) {
@@ -55,27 +55,31 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		fps.wait();
 
 		//ゲームクリアしたか(スタート地点画面外まで逃げ切ったか)判定
-		if (windowSizeController.isReachedWindowEdge(runner.getRight())) {
+		if (windowSizeController.isReachedEdge(runner.getRight())) {
 			if (runner.getLeft() <= 0) {
-				GameEnd gameEnd;
+				gameEnd.drawClearMenu();
 				if (gameEnd.selectPlayingNextStage()) {
-					Caterpillar::resetCaterpillarsList();	
-					runner.startRunning(backgroundController.groundYPos_);
 				} else {
+					playerScore.resetScore();
 					title.switchHasSeenTitleFlag();
 				}
+				gameEnd.retryGame(backgroundController.groundYPos_, runner);
 				continue;
 			}
 		}
 
 		//ゲームクリア判定後に行わないと、逃げ切りが行えないので注意
 		//画面を更新したあとに判定を行わないと「当たってないのに当たっている」ということになるので注意
-		if (Caterpillar::caterpillarHittingRunnerIsExists(runner.getLeft(), runner.getRight(), runner.getTop(), runner.getButtom())) break;
+		if (Caterpillar::caterpillarHittingRunnerIsExists(runner.getLeft(), runner.getRight(), runner.getTop(), runner.getButtom())) {
+			gameEnd.drawGameOverMenu();
+			playerScore.resetScore();
+			
+			if (gameEnd.selectPlayingNextStage()) {
 
-		if (counter == 1000) {
-			break;
-		} else {
-			counter++;
+			} else {
+				title.switchHasSeenTitleFlag();
+			}
+			gameEnd.retryGame(backgroundController.groundYPos_, runner);
 		}
 	}
 

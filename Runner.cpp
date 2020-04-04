@@ -23,7 +23,7 @@ void Runner::move(WindowSizeController& windowSizeController, BackgroundControll
 	jump(backgroundController.isLandingGround(getTop(), height_), backgroundController.groundYPos_);
 	
 	//画面端にたどり着いたら
-	if (windowSizeController.isReachedWindowEdge(getRight())) {
+	if (windowSizeController.isReachedEdge(getRight())) {
 		if (xPos_ > 0) {
 			//スタート地点から反対側の端で引き返す
 			imageHandle_ = LoadGraph("./File/Image/TurningBack_TheWay_Runner.png");
