@@ -13,7 +13,7 @@ private:
 public:
 	GameEnd();
 
-	bool continueGame();
+	bool selectPlayingNextStage();
 };
 
 #endif

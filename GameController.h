@@ -51,7 +51,13 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		if (windowSizeController.isReachedWindowEdge(runner.getXPos() + runner.width_)) {
 			if (runner.getXPos() <= 0) {
 				GameEnd gameEnd;
-				gameEnd.continueGame();
+				if (gameEnd.selectPlayingNextStage()) {
+					Caterpillar::resetCaterpillarsList();	
+					runner.startRunning(backgroundController.groundYPos_);
+					continue;
+				} else {
+					break;
+				}
 			}
 		}
 

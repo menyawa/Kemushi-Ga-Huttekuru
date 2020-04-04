@@ -7,17 +7,12 @@ GameEnd::GameEnd() {
 
 
 //クリアメニューを出し、続けるかどうかを返す
-bool GameEnd::continueGame() {
+bool GameEnd::selectPlayingNextStage() {
 	DrawGraph(0, 0, clearMenuImageHandle_, TRUE);
 	WaitKey();
 
 	//続けるか終わる、どちらかを選択するまで待つ
 	while (CheckHitKey(KEY_INPUT_R) == false && CheckHitKey(KEY_INPUT_E) == false) WaitKey();
 
-	if (CheckHitKey(KEY_INPUT_E)) {
-		return true;
-	} else {
-		Caterpillar::resetCaterpillarsList();
-		return false;
-	}
+	return CheckHitKey(KEY_INPUT_R);
 }
